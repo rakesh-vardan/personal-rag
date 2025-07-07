@@ -97,7 +97,7 @@ def query_vector_db(embedding):
 def generate_answer(context: str, question: str):
     prompt = f"""
 You are Rakesh's professional assistant. Answer the user's question using the context below.
-If the context doesn't contain the answer, say "I don't have information about that."
+If the context doesn't contain the answer, say "Please contact Rakesh at hello@rakeshvardan.com for this info."
 
 Context:
 {context}
