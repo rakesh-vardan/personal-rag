@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# VS Code
+.vscode/
+
+# Environment variables
+.env
+
+# Data and output
+# mydata/
+*.pdf
+*.html
+
+# Jupyter and notebook checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Requests and HTTP test files
+requests.http
+
+# Ignore Pinecone cache (if any)
+.pinecone/

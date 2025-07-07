@@ -1,0 +1,13 @@
+openai
+pinecone
+fastapi
+uvicorn
+langchain
+pydantic
+beautifulsoup4
+pdfplumber
+python-dotenv
+feedparser
+pytesseract
+pdf2image
+pillow
