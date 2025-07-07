@@ -11,6 +11,7 @@ import openai
 from pinecone import Pinecone, ServerlessSpec
 import os
 from dotenv import load_dotenv
+import uvicorn
 
 # Load environment variables
 load_dotenv()
@@ -123,4 +124,6 @@ def split_text(text, max_length=500):
 
 
 if __name__ == "__main__":
-    pass
+    
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=False)
