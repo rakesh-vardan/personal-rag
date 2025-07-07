@@ -1,4 +1,4 @@
-# personal_qa_bot.py
+# app.py
 
 # ---------------------
 # Step 1: Install dependencies
@@ -112,12 +112,8 @@ def ask_question(req: QuestionRequest):
 # ---------------------
 # Step 8: Run server
 # ---------------------
-# Run with: uvicorn personal_qa_bot:app --reload
+# Run with: uvicorn app:app --reload
 
-# ---------------------
-# Step 9: Populate Pinecone - Data Ingestion Script
-# ---------------------
-# Moved to ingest_data.py for easier maintenance.
 
 def split_text(text, max_length=500):
     words = text.split()

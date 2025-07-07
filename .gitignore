@@ -17,11 +17,6 @@ ENV/
 # Environment variables
 .env
 
-# Data and output
-# mydata/
-*.pdf
-*.html
-
 # Jupyter and notebook checkpoints
 .ipynb_checkpoints/
 

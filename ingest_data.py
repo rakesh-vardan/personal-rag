@@ -1,3 +1,5 @@
+# ingest_data.py
+# ---------------------
 from pinecone import Pinecone, ServerlessSpec
 import openai
 from bs4 import BeautifulSoup
@@ -5,7 +7,6 @@ import pdfplumber
 import os
 from dotenv import load_dotenv
 import feedparser
-import requests
 import pytesseract
 from pdf2image import convert_from_path
 
