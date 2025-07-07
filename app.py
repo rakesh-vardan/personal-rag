@@ -5,13 +5,18 @@
 # ---------------------
 # pip install openai pinecone-client fastapi uvicorn langchain pydantic beautifulsoup4 pdfplumber
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 import openai
 from pinecone import Pinecone, ServerlessSpec
 import os
 from dotenv import load_dotenv
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from fastapi.responses import JSONResponse
 
 # Load environment variables
 load_dotenv()
@@ -43,6 +48,26 @@ index = pc.Index(INDEX_NAME)
 # Step 3: FastAPI app setup
 # ---------------------
 app = FastAPI()
+
+# Enable CORS for all origins (customize as needed)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "https://rakeshvardan.com", "https://www.rakeshvardan.com/"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Add rate limiting
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+
+@app.exception_handler(RateLimitExceeded)
+def rate_limit_handler(request, exc):
+    return JSONResponse(
+        status_code=429,
+        content={"detail": "Rate limit exceeded. Please try again later."},
+    )
 
 
 class QuestionRequest(BaseModel):
@@ -99,7 +124,8 @@ Answer:
 # Step 7: API Route - Ask Question
 # ---------------------
 @app.post("/ask")
-def ask_question(req: QuestionRequest):
+@limiter.limit("5/minute")
+def ask_question(request: Request, req: QuestionRequest):
     try:
         embedding = get_embedding(req.question)
         context = query_vector_db(embedding)

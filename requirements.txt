@@ -11,3 +11,4 @@ feedparser
 pytesseract
 pdf2image
 pillow
+slowapi
