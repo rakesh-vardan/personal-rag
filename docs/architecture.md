@@ -3,6 +3,15 @@
 ```mermaid
 
 flowchart TD
+
+    %% Dummy nodes to align both subgraphs at the top
+    X1[ ]:::invisible
+    X2[ ]:::invisible
+    X1 --> UA
+    X2 --> A
+
+    classDef invisible fill:none,stroke:none,color:none;
+
     %% Ingestion Pipeline
     subgraph Ingestion
         A["Data Sources: 
